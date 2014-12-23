@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:id="@+id/phone_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/manufacturer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SONY"
+            android:textSize="40sp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-thin"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xperia Z"
+            android:textSize="28sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-7dp"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phone_details"
+        android:layout_below="@id/phone_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESOLUTION"
+                android:textStyle="bold"
+                android:textColor="#9B9B9B"/>
+
+            <TextView
+                android:id="@+id/phone_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1080x1920"
+                android:textSize="26sp"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="-5dp"/>
+            </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DOTS PER INCH"
+                android:textStyle="bold"
+                android:textColor="#9B9B9B"/>
+
+            <TextView
+                android:id="@+id/phone_dpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="440.53"
+                android:textSize="26sp"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="-5dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCREEN SIZE"
+                android:textStyle="bold"
+                android:textColor="#9B9B9B"/>
+
+            <TextView
+                android:id="@+id/phone_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.91"
+                android:textSize="26sp"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="-5dp"/>
+        </LinearLayout>
+
+        </LinearLayout>
+
+</RelativeLayout>
