@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main">#03A9F4</color>
+    <color name="sub">#0277bd</color>
+    <color name="standardText">#D9000000</color>
+    <color name="lightBlack">#8C000000</color>
+    <color name="lightGray">#727272</color>
+    <color name="veryLightGray">#E9E9E9</color>
+    <color name="accent">#FF9800</color>
+    <!--<color name="accent">#03A9F4</color>-->
 </resources>

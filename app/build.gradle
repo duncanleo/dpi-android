@@ -8,8 +8,8 @@ android {
         applicationId "com.duncan.dpi"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 6
-        versionName "2.0.2"
+        versionCode 7
+        versionName "2.1"
     }
     buildTypes {
         release {
@@ -19,8 +19,15 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:21.+"
-    compile 'com.android.support:cardview-v7:+'
+    compile 'com.rengwuxian.materialedittext:library:1.8.3'
+    compile 'com.afollestad:material-dialogs:0.6.3.5'
 }

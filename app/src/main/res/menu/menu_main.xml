@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Main" >
+    <item android:title="@string/device_list" android:id="@+id/deviceList"/>
 </menu>

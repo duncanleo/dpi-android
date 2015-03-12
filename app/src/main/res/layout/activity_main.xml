@@ -1,92 +1,78 @@
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:animateLayoutChanges="true">
+    <!--Toolbar-->
     <android.support.v7.widget.Toolbar
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
         android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"/>
-
-    <android.support.v4.widget.DrawerLayout
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="?attr/colorPrimary"
+        android:elevation="2dp"
+        app:theme="@style/ToolbarTheme"
+        app:popupTheme="@style/Theme.AppCompat.Light"/>
+    <!--Fake shadow for pre-Lollipop-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/toolbar"
+        android:foreground="?android:windowContentOverlay"/>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Main"
-        android:fitsSystemWindows="true"
-        android:id="@+id/drawerLayout">
-
-        <LinearLayout
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/width"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-
-            <FrameLayout
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Width"
+            app:floatingLabel="highlight"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/height"
+            android:layout_below="@id/width"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Height"
+            app:floatingLabel="highlight"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/screenSize"
+            android:layout_below="@id/height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Screen size"
+            app:floatingLabel="highlight"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/screenSize">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/content_frame"
-                android:background="#FFFFFF">
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <!-- Your drawer view. This can be any view, LinearLayout
-             is just an example. As we have set fitSystemWindows=true
-             this will be displayed under the status bar. -->
-        <LinearLayout
-            android:layout_width="284dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left|start"
-            android:fitsSystemWindows="true"
-            android:background="#FAFAFA"
-            android:orientation="vertical">
-
-            <!-- Your drawer content -->
-
-            <TextView
-                android:id="@+id/choice_todpi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Convert to DPI"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="25sp"
-                android:fontFamily="sans-serif-condensed"
-                android:padding="16dp"
-                android:clickable="true"/>
-
-            <TextView
-                android:id="@+id/choice_fromdpi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Convert from DPI"
-                android:textColor="#000000"
-                android:textSize="25sp"
-                android:fontFamily="sans-serif-condensed"
-                android:padding="16dp"
-                android:clickable="true"/>
-
-            <TextView
-                android:id="@+id/choice_common"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="My Device"
-                android:textColor="#000000"
-                android:textSize="25sp"
-                android:fontFamily="sans-serif-condensed"
-                android:padding="16dp"
-                android:clickable="true"/>
-
-        </LinearLayout>
-
-
-
-    </android.support.v4.widget.DrawerLayout>
-
-</LinearLayout>
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/dynamicView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    layout="@layout/view_dynamic"/>
+                <TextView
+                    android:id="@+id/answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/dynamicView"
+                    android:text="- dpi"
+                    android:textSize="24sp"
+                    android:textColor="@color/standardText"
+                    android:fontFamily="sans-serif-medium"/>
+                </RelativeLayout>
+            </ScrollView>
+    </RelativeLayout>
+</RelativeLayout>

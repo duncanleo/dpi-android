@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialEditText">
+        <attr name="label" format="string"/>
+        <attr name="correction" format="string"/>
+        <attr name="android:inputType"/>
+        <attr name="android:imeOptions"/>
+        <attr name="android:singleLine"/>
+        <attr name="android:imeActionLabel"/>
+    </declare-styleable>
+    <declare-styleable name="TextViewFont">
+        <attr name="android:fontFamily"/>
+    </declare-styleable>
+</resources>
