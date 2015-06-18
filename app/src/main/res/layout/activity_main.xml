@@ -25,33 +25,45 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:padding="16dp">
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/width"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/widthContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Width"
-            app:floatingLabel="highlight"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/height"
-            android:layout_below="@id/width"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/width"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_width"
+                android:inputType="number"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/heightContainer"
+            android:layout_below="@id/widthContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Height"
-            app:floatingLabel="highlight"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/screenSize"
-            android:layout_below="@id/height"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_height"
+                android:inputType="number"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/screenSizeContainer"
+            android:layout_below="@id/heightContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="Screen size"
-            app:floatingLabel="highlight"/>
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/screenSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_screensize"
+                android:inputType="numberDecimal"/>
+        </android.support.design.widget.TextInputLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/screenSize">
+            android:layout_below="@id/screenSizeContainer">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

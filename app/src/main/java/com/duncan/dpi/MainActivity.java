@@ -2,27 +2,28 @@ package com.duncan.dpi;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.rengwuxian.materialedittext.MaterialEditText;
-
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DynamicViewController controller;
-    MaterialEditText width, height, screenSize;
+    TextInputLayout widthContainer, heightContainer, screenSizeContainer;
+    EditText width, height, screenSize;
     TextView answer;
     final int DEVICE_LIST_REQUEST_CODE = 9999;
     boolean viewedDeviceListDialog = false;
@@ -37,13 +38,21 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
 
         this.controller = new DynamicViewController(findViewById(R.id.dynamicView));
-        this.width = (MaterialEditText)findViewById(R.id.width);
-        this.height = (MaterialEditText)findViewById(R.id.height);
-        this.screenSize = (MaterialEditText)findViewById(R.id.screenSize);
         this.answer = (TextView)findViewById(R.id.answer);
+
+        this.widthContainer = (TextInputLayout)findViewById(R.id.widthContainer);
+        this.heightContainer = (TextInputLayout)findViewById(R.id.heightContainer);
+        this.screenSizeContainer = (TextInputLayout)findViewById(R.id.screenSizeContainer);
+
+        this.width = this.widthContainer.getEditText();
+        this.height = this.heightContainer.getEditText();
+        this.screenSize = this.screenSizeContainer.getEditText();
 
         //Setup
         setSupportActionBar(toolbar);
+        /*this.widthContainer.setErrorEnabled(true);
+        this.heightContainer.setErrorEnabled(true);
+        this.screenSizeContainer.setErrorEnabled(true);*/
 
         setupTextWatchers();
     }
@@ -102,16 +111,20 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.deviceList) {
             if (!viewedDeviceListDialog) {
-                new MaterialDialog.Builder(this).title(R.string.device_list).content(R.string.dialog_content)
-                        .positiveText(R.string.dialog_agree).negativeText(R.string.dialog_cancel).callback(new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        super.onPositive(dialog);
-                        Intent intent = new Intent(MainActivity.this,  DeviceListActivity.class);
-                        startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE);
-                    }
-                }).show();
-                viewedDeviceListDialog = true;
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
+                builder.setMessage(R.string.dialog_content)
+                        .setTitle(R.string.device_list)
+                        .setPositiveButton(R.string.dialog_agree, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                viewedDeviceListDialog = true;
+                                Intent intent = new Intent(MainActivity.this, DeviceListActivity.class);
+                                startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE);
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_cancel, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             } else {
                 //Since seen before, no need to show again.
                 Intent intent = new Intent(MainActivity.this,  DeviceListActivity.class);
@@ -130,7 +143,9 @@ public class MainActivity extends ActionBarActivity {
             height.setText("" + device.getScreenHeight());
             screenSize.setText(String.format("%.2f", device.getScreenSize()));
             attemptCalculation();
-            Toast.makeText(MainActivity.this, "Inserted data from " + device.getTitle(), Toast.LENGTH_SHORT).show();
+            Snackbar.make(width, String.format("%s %s", getString(R.string.message_populate), device.getTitle()), Snackbar.LENGTH_LONG)
+                    .show();
+            //Toast.makeText(MainActivity.this, "Inserted data from " + device.getTitle(), Toast.LENGTH_SHORT).show();
         }
     }
 }

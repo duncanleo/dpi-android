@@ -9,5 +9,4 @@ Clone the repository and open it in Android Studio, or use Android Studio's "Che
 ###Acknowledgements
 This project uses the following libraries:
 - Android Support Library (appcompat-v7)
-- [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
-- [material-dialogs](https://github.com/afollestad/material-dialogs)
+- Android Design Support Library
