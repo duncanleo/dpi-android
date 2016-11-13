@@ -1,4 +1,4 @@
-package com.duncan.dpi;
+package com.duncan.dpi.util;
 
 import android.app.Activity;
 import android.content.Context;

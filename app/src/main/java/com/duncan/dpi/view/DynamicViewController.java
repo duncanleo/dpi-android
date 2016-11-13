@@ -1,4 +1,4 @@
-package com.duncan.dpi;
+package com.duncan.dpi.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.duncan.dpi.R;
+import com.duncan.dpi.util.CalcUtil;
 
 /**
  * Created by duncan on 10/3/15.

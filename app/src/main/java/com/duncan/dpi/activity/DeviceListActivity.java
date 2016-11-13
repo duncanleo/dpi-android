@@ -1,4 +1,4 @@
-package com.duncan.dpi;
+package com.duncan.dpi.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.duncan.dpi.util.CalcUtil;
+import com.duncan.dpi.model.Device;
+import com.duncan.dpi.adapter.DeviceListAdapter;
+import com.duncan.dpi.util.DeviceUtil;
+import com.duncan.dpi.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.duncan.dpi;
+package com.duncan.dpi.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.duncan.dpi.R;
+import com.duncan.dpi.model.Device;
 
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package com.duncan.dpi;
+package com.duncan.dpi.util;
+
+import com.duncan.dpi.model.Device;
 
 import java.util.ArrayList;
 import java.util.List;

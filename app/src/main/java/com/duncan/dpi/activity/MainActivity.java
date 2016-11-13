@@ -1,4 +1,4 @@
-package com.duncan.dpi;
+package com.duncan.dpi.activity;
 
 
 import android.app.Activity;
@@ -18,6 +18,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.duncan.dpi.util.CalcUtil;
+import com.duncan.dpi.model.Device;
+import com.duncan.dpi.view.DynamicViewController;
+import com.duncan.dpi.R;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
