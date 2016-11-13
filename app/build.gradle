@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
@@ -17,16 +19,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
+    mavenCentral()
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
