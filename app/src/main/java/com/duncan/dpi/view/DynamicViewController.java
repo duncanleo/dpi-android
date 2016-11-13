@@ -25,7 +25,7 @@ public class DynamicViewController {
     public DynamicViewController(View rootView) {
         this.rootView = rootView;
         this.viewHolder = new DynamicViewHolder(rootView);
-        maxWidth = CalcUtil.getWidth((Activity)rootView.getContext());
+        maxWidth = CalcUtil.INSTANCE.getWidth((Activity)rootView.getContext());
         maxHeight = pxFromDp(rootView.getContext(), 200);
 
         updateAllText();
