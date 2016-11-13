@@ -36,4 +36,10 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'io.reactivex:rxjava:1.2.1'
+    compile 'io.reactivex:rxkotlin:0.60.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
 }
