@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.TextView
 import com.duncan.dpi.R
 import com.duncan.dpi.model.Device
 import com.duncan.dpi.util.CalcUtil
@@ -24,10 +22,6 @@ import rx.functions.Func1
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
-    lateinit var width: EditText
-    lateinit var height: EditText
-    lateinit var screenSize: EditText
-    lateinit var answer: TextView
     internal val DEVICE_LIST_REQUEST_CODE = 9999
     internal var viewedDeviceListDialog = false
 
@@ -65,8 +59,6 @@ class MainActivity : AppCompatActivity() {
 
         val screenWidth = resources.displayMetrics.widthPixels
         val screenHeight = resources.displayMetrics.heightPixels
-
-        val aspectRatio = width / height.toDouble()
 
         val maxWidth = screenWidth * 0.5
         val maxHeight = screenHeight * 0.6
