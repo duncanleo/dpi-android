@@ -2,54 +2,32 @@ package com.duncan.dpi.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.squareup.moshi.Json
 
 /**
  * Created by duncan on 11/3/15.
  */
-class Device : Parcelable {
-    var title: String? = null
-        private set
-    var screenWidth: Int = 0
-        private set
-    var screenHeight: Int = 0
-        private set
-    var screenSize: Double = 0.toDouble()
-
-    constructor(title: String, screenWidth: Int, screenHeight: Int, screenSize: Double) {
-        this.title = title
-        this.screenWidth = screenWidth
-        this.screenHeight = screenHeight
-        this.screenSize = screenSize
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeString(this.title)
-        dest.writeInt(this.screenWidth)
-        dest.writeInt(this.screenHeight)
-        dest.writeDouble(this.screenSize)
-    }
-
-    private constructor(`in`: Parcel) {
-        this.title = `in`.readString()
-        this.screenWidth = `in`.readInt()
-        this.screenHeight = `in`.readInt()
-        this.screenSize = `in`.readDouble()
-    }
-
+data class Device(
+        @Json(name = "name") var name: String,
+        @Json(name = "width") var width: Int,
+        @Json(name = "height") var height: Int,
+        @Json(name = "screenSize") var screenSize: Double
+) : Parcelable {
     companion object {
-
         @JvmField val CREATOR: Parcelable.Creator<Device> = object : Parcelable.Creator<Device> {
-            override fun createFromParcel(source: Parcel): Device {
-                return Device(source)
-            }
-
-            override fun newArray(size: Int): Array<Device?> {
-                return arrayOfNulls(size)
-            }
+            override fun createFromParcel(source: Parcel): Device = Device(source)
+            override fun newArray(size: Int): Array<Device?> = arrayOfNulls(size)
         }
+    }
+
+    constructor(source: Parcel) : this(source.readString(), source.readInt(), source.readInt(), source.readDouble())
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(name)
+        dest?.writeInt(width)
+        dest?.writeInt(height)
+        dest?.writeDouble(screenSize)
     }
 }

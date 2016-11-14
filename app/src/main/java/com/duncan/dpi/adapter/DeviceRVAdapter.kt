@@ -28,8 +28,8 @@ class DeviceRVAdapter(data: List<Device>) : RecyclerView.Adapter<DeviceRVAdapter
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val device = data[position]
-        holder?.deviceName?.text = device.title
-        holder?.deviceSpecs?.text = "${device.screenWidth}x${device.screenHeight} @ ${String.format("%.1f", device.screenSize)}\""
+        holder?.deviceName?.text = device.name
+        holder?.deviceSpecs?.text = "${device.width}x${device.height} @ ${String.format("%.1f", device.screenSize)}\""
 
         when(position) {
             0 -> holder?.deviceName?.setTypeface(null, Typeface.BOLD)

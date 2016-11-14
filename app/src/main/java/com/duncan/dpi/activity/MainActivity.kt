@@ -100,11 +100,11 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == DEVICE_LIST_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val device = data?.getParcelableExtra<Device>("device")
-            inputWidth.editText?.setText("${device?.screenWidth}")
-            inputHeight.editText?.setText("${device?.screenHeight}")
+            inputWidth.editText?.setText("${device?.width}")
+            inputHeight.editText?.setText("${device?.height}")
             inputScreenSize.editText?.setText(String.format("%.2f", device?.screenSize))
             attemptCalculation()
-            Snackbar.make(imageScreen, String.format("%s %s", getString(R.string.message_populate), device?.title), Snackbar.LENGTH_LONG)
+            Snackbar.make(imageScreen, String.format("%s %s", getString(R.string.message_populate), device?.name), Snackbar.LENGTH_LONG)
                     .show()
         }
     }

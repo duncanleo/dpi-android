@@ -44,7 +44,7 @@ class DeviceListActivity : AppCompatActivity() {
         val densityDPI = resources.displayMetrics.densityDpi
 
         deviceList.add(Device("${Build.MANUFACTURER} ${Build.MODEL} (Your device)",  widthPixels, heightPixels, CalcUtil.calculateScreenSize(widthPixels, heightPixels, densityDPI)))
-        deviceList.addAll(DeviceUtil.getDeviceList())
+        deviceList.addAll(DeviceUtil(this@DeviceListActivity).getDeviceList())
 
         val adapter = DeviceRVAdapter(deviceList)
         recyclerView.adapter = adapter
