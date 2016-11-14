@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
@@ -23,7 +22,6 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     internal val DEVICE_LIST_REQUEST_CODE = 9999
-    internal var viewedDeviceListDialog = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,23 +88,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.deviceList -> {
-                if (!viewedDeviceListDialog) {
-                    val builder = AlertDialog.Builder(this@MainActivity, R.style.DialogTheme)
-                    builder.setMessage(R.string.dialog_content)
-                            .setTitle(R.string.device_list)
-                            .setPositiveButton(R.string.dialog_agree) { dialogInterface, i ->
-                                viewedDeviceListDialog = true
-                                val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
-                                startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
-                            }
-                            .setNegativeButton(R.string.dialog_cancel, null)
-                    val dialog = builder.create()
-                    dialog.show()
-                } else {
-                    //Since seen before, no need to show again.
-                    val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
-                    startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
-                }
+                //Since seen before, no need to show again.
+                val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
+                startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
             }
         }
         return false
