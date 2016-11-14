@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
             params.height = intendedHeight.toInt()
         }
 
-        Log.d("MainA", "screen=$screenWidth x $screenHeight | image=${params.width}x${params.height}")
         imageScreen.layoutParams = params
     }
 
