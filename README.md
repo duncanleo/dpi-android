@@ -1,12 +1,18 @@
 # DPI Calculator
-DPI Calculator is an Android app to calculate the DPI of devices.
+This is an Android app to calculate the DPI of a digital screen with several pieces of its specifications:
+- Width (in pixels)
+- Height (in pixels)
+- Screen size (in inches)
 
-This is a small utility app that mainly use to test out new things (such as updates to the Support Library).
+The app is written entirely in Kotlin. It is published on the Play Store [here](https://play.google.com/store/apps/details?id=com.duncan.dpi)
 
-###Instructions
-Clone the repository and open it in Android Studio, or use Android Studio's "Check out Project from Version Control" option.
+### Instructions
+Clone the repository and open the project in Android Studio. Android Studio's "Check out Project from Version Control" option should also work.
 
-###Acknowledgements
+### Acknowledgements
 This project uses the following libraries:
-- Android Support Library (appcompat-v7)
-- Android Design Support Library
+- Android Design and Support Library (appcompat-v7)
+- Android ConstraintLayout
+- RxJava, RxKotlin and RxAndroid
+- RxBinding (Jake Wharton)
+- Moshi (Square)
