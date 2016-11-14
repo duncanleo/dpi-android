@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +15,6 @@ import android.widget.TextView
 import com.duncan.dpi.R
 import com.duncan.dpi.model.Device
 import com.duncan.dpi.util.CalcUtil
-import com.jakewharton.rxbinding.support.design.widget.RxTextInputLayout
 import com.jakewharton.rxbinding.widget.RxTextView
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent
 import kotlinx.android.synthetic.main.activity_main.*
@@ -123,17 +120,16 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == DEVICE_LIST_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val device = data.getParcelableExtra<Device>("device")
-            inputWidth.editText?.setText("${device.screenWidth}")
-            inputHeight.editText?.setText("${device.screenHeight}")
-            inputScreenSize.editText?.setText(String.format("%.2f", device.screenSize))
+            val device = data?.getParcelableExtra<Device>("device")
+            inputWidth.editText?.setText("${device?.screenWidth}")
+            inputHeight.editText?.setText("${device?.screenHeight}")
+            inputScreenSize.editText?.setText(String.format("%.2f", device?.screenSize))
             attemptCalculation()
-            Snackbar.make(imageScreen, String.format("%s %s", getString(R.string.message_populate), device.title), Snackbar.LENGTH_LONG)
+            Snackbar.make(imageScreen, String.format("%s %s", getString(R.string.message_populate), device?.title), Snackbar.LENGTH_LONG)
                     .show()
-            //Toast.makeText(MainActivity.this, "Inserted data from " + device.getTitle(), Toast.LENGTH_SHORT).show();
         }
     }
 }
