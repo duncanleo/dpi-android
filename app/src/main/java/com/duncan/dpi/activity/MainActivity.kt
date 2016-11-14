@@ -2,34 +2,31 @@ package com.duncan.dpi.activity
 
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
-
-import com.duncan.dpi.util.CalcUtil
-import com.duncan.dpi.model.Device
-import com.duncan.dpi.view.DynamicViewController
 import com.duncan.dpi.R
+import com.duncan.dpi.model.Device
+import com.duncan.dpi.util.CalcUtil
+import com.jakewharton.rxbinding.support.design.widget.RxTextInputLayout
+import com.jakewharton.rxbinding.widget.RxTextView
+import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent
+import kotlinx.android.synthetic.main.activity_main.*
+import rx.android.schedulers.AndroidSchedulers
+import rx.functions.Action1
+import rx.functions.Func1
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
-    lateinit var toolbar: Toolbar
-    lateinit var controller: DynamicViewController
-    lateinit var widthContainer: TextInputLayout
-    lateinit var heightContainer: TextInputLayout
-    lateinit var screenSizeContainer: TextInputLayout
     lateinit var width: EditText
     lateinit var height: EditText
     lateinit var screenSize: EditText
@@ -38,75 +35,61 @@ class MainActivity : AppCompatActivity() {
     internal var viewedDeviceListDialog = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Vars
-        toolbar = findViewById(R.id.toolbar) as Toolbar
-
-        this.controller = DynamicViewController(findViewById(R.id.dynamicView))
-        this.answer = findViewById(R.id.answer) as TextView
-
-        this.widthContainer = findViewById(R.id.widthContainer) as TextInputLayout
-        this.heightContainer = findViewById(R.id.heightContainer) as TextInputLayout
-        this.screenSizeContainer = findViewById(R.id.screenSizeContainer) as TextInputLayout
-
-        this.width = this.widthContainer.editText!!
-        this.height = this.heightContainer.editText!!
-        this.screenSize = this.screenSizeContainer.editText!!
-
-        //Setup
-        setSupportActionBar(toolbar)
-        /*this.widthContainer.setErrorEnabled(true);
-        this.heightContainer.setErrorEnabled(true);
-        this.screenSizeContainer.setErrorEnabled(true);*/
-
-        setupTextWatchers()
-    }
-
-    /**
-     * Setup the view_dynamic view to reflect texts as they are typed
-     */
-    private fun setupTextWatchers() {
-        val attemptCalcOnTextChange = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                attemptCalculation()
-            }
-
-            override fun afterTextChanged(s: Editable) {
-            }
-        }
-        this.width.addTextChangedListener(attemptCalcOnTextChange)
-        this.height.addTextChangedListener(attemptCalcOnTextChange)
-        this.screenSize.addTextChangedListener(attemptCalcOnTextChange)
+        val filter = Func1<TextViewTextChangeEvent, Boolean> { event -> event.text().isNotEmpty() }
+        val action = Action1<TextViewTextChangeEvent> { event -> attemptCalculation() }
+        RxTextView.textChangeEvents(inputWidth.editText!!)
+                .debounce(700, TimeUnit.MILLISECONDS)
+                .filter(filter)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action)
+        RxTextView.textChangeEvents(inputHeight.editText!!)
+                .debounce(700, TimeUnit.MILLISECONDS)
+                .filter(filter)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action)
+        RxTextView.textChangeEvents(inputScreenSize.editText!!)
+                .debounce(700, TimeUnit.MILLISECONDS)
+                .filter(filter)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action)
     }
 
     /**
      * Attempt to calculate DPI
      */
     private fun attemptCalculation() {
-        val w: Int
-        val h: Int
-        val ss: Double
-        try {
-            w = Integer.parseInt(width.text.toString())
-            h = Integer.parseInt(height.text.toString())
-            ss = java.lang.Double.parseDouble(screenSize.text.toString())
-            controller.setWidth(w)
-            controller.setHeight(h)
-            controller.setScreenSize(ss)
-            answer.text = CalcUtil.calculateDPI(w, h, ss).toString() + " dpi"
-        } catch (e: Exception) {
-            controller.setWidth(-1)
-            controller.setHeight(-1)
-            controller.setScreenSize(-1.0)
-            answer.text = "- dpi"
+        val width = try { inputWidth.editText?.text.toString().toInt() } catch (e: NumberFormatException) { 0 }
+        val height = try { inputHeight.editText?.text.toString().toInt() } catch (e: NumberFormatException) { 0 }
+        val screenSize = try { inputScreenSize.editText?.text.toString().toDouble() } catch (e: NumberFormatException) { 0.0 }
+        labelDensity.text = "${CalcUtil.calculateDPI(width, height, screenSize)} dpi"
+
+        val screenWidth = resources.displayMetrics.widthPixels
+        val screenHeight = resources.displayMetrics.heightPixels
+
+        val aspectRatio = width / height.toDouble()
+
+        val maxWidth = screenWidth * 0.5
+        val maxHeight = screenHeight * 0.6
+
+        val params = imageScreen.layoutParams
+
+        // Attempt maxWidth
+        params.width = maxWidth.toInt()
+        val intendedHeight = maxWidth / width * height
+        if (intendedHeight > maxHeight) {
+            // Use maxWidth
+            val intendedWidth = maxHeight / height * width
+            params.width = intendedWidth.toInt()
+            params.height = maxHeight.toInt()
+        } else {
+            params.height = intendedHeight.toInt()
         }
 
+        Log.d("MainA", "screen=$screenWidth x $screenHeight | image=${params.width}x${params.height}")
+        imageScreen.layoutParams = params
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -116,23 +99,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.deviceList) {
-            if (!viewedDeviceListDialog) {
-                val builder = AlertDialog.Builder(this@MainActivity, R.style.DialogTheme)
-                builder.setMessage(R.string.dialog_content)
-                        .setTitle(R.string.device_list)
-                        .setPositiveButton(R.string.dialog_agree) { dialogInterface, i ->
-                            viewedDeviceListDialog = true
-                            val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
-                            startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
-                        }
-                        .setNegativeButton(R.string.dialog_cancel, null)
-                val dialog = builder.create()
-                dialog.show()
-            } else {
-                //Since seen before, no need to show again.
-                val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
-                startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
+        when(item.itemId) {
+            R.id.deviceList -> {
+                if (!viewedDeviceListDialog) {
+                    val builder = AlertDialog.Builder(this@MainActivity, R.style.DialogTheme)
+                    builder.setMessage(R.string.dialog_content)
+                            .setTitle(R.string.device_list)
+                            .setPositiveButton(R.string.dialog_agree) { dialogInterface, i ->
+                                viewedDeviceListDialog = true
+                                val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
+                                startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
+                            }
+                            .setNegativeButton(R.string.dialog_cancel, null)
+                    val dialog = builder.create()
+                    dialog.show()
+                } else {
+                    //Since seen before, no need to show again.
+                    val intent = Intent(this@MainActivity, DeviceListActivity::class.java)
+                    startActivityForResult(intent, DEVICE_LIST_REQUEST_CODE)
+                }
             }
         }
         return false
@@ -142,11 +127,11 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == DEVICE_LIST_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val device = data.getParcelableExtra<Device>("device")
-            width.setText("" + device.screenWidth)
-            height.setText("" + device.screenHeight)
-            screenSize.setText(String.format("%.2f", device.screenSize))
+            inputWidth.editText?.setText("${device.screenWidth}")
+            inputHeight.editText?.setText("${device.screenHeight}")
+            inputScreenSize.editText?.setText(String.format("%.2f", device.screenSize))
             attemptCalculation()
-            Snackbar.make(width, String.format("%s %s", getString(R.string.message_populate), device.title), Snackbar.LENGTH_LONG)
+            Snackbar.make(imageScreen, String.format("%s %s", getString(R.string.message_populate), device.title), Snackbar.LENGTH_LONG)
                     .show()
             //Toast.makeText(MainActivity.this, "Inserted data from " + device.getTitle(), Toast.LENGTH_SHORT).show();
         }

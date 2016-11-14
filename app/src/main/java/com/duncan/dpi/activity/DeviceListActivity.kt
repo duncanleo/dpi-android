@@ -7,17 +7,14 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-
 import com.duncan.dpi.R
 import com.duncan.dpi.adapter.DeviceListAdapter
 import com.duncan.dpi.model.Device
 import com.duncan.dpi.util.CalcUtil
 import com.duncan.dpi.util.DeviceUtil
-
-import java.util.ArrayList
+import java.util.*
 
 
 class DeviceListActivity : AppCompatActivity() {
@@ -32,10 +29,7 @@ class DeviceListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_devicelist)
 
         //Vars
-        toolbar = findViewById(R.id.toolbar) as Toolbar
         list = findViewById(R.id.deviceList) as ListView
-
-        setSupportActionBar(toolbar)
 
         adapter = DeviceListAdapter(this, deviceList)
         list.adapter = adapter

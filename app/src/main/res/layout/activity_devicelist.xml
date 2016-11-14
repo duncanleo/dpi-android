@@ -5,24 +5,13 @@
     android:layout_height="match_parent"
     android:background="#FFF"
     tools:context="com.duncan.dpi.activity.DeviceListActivity">
-    <!--Toolbar-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:background="?attr/colorPrimary"
-        android:elevation="2dp"
-        app:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/Theme.AppCompat.Light"/>
     <!--Fake shadow for pre-Lollipop-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@id/toolbar"
         android:foreground="?android:windowContentOverlay"/>
     <ListView
         android:id="@+id/deviceList"
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

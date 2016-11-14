@@ -15,6 +15,8 @@
 
     <string name="error_blank">cannot be blank</string>
 
+    <string name="instruction">Enter a width, </string>
+
     <string name="device_list">Device List</string>
     <string name="dialog_content">Instead of typing in each field manually, you can view a pre-populated list of devices and insert data from there. Do you wish to do so?</string>
     <string name="dialog_agree">View</string>
