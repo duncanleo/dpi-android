@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import android.view.View
 import com.duncan.dpi.R
 import com.duncan.dpi.`interface`.ItemClickListener
@@ -27,6 +28,8 @@ class DeviceListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_devicelist)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val layoutManager = LinearLayoutManager(this@DeviceListActivity)
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(DividerItemDecoration(this@DeviceListActivity, layoutManager.orientation))
@@ -45,5 +48,14 @@ class DeviceListActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
