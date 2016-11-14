@@ -4,7 +4,7 @@ This is an Android app to calculate the DPI of a digital screen with several pie
 - Height (in pixels)
 - Screen size (in inches)
 
-![Screenshot](./screenshot.png)
+![Screenshot](./screenshot.png =360x)
 
 The app is written entirely in Kotlin. It is published on the Play Store [here](https://play.google.com/store/apps/details?id=com.duncan.dpi)
 
