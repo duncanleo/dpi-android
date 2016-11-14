@@ -1,8 +1,10 @@
 package com.duncan.dpi.activity
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -23,6 +25,7 @@ import java.util.*
 class DeviceListActivity : AppCompatActivity() {
     internal var deviceList: MutableList<Device> = ArrayList()
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1) // getRealSize is actually available in API 14+. This warning sidesteps the bug where it's flagged otherwise
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
@@ -34,7 +37,13 @@ class DeviceListActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(DividerItemDecoration(this@DeviceListActivity, layoutManager.orientation))
 
-        deviceList.add(Device("${Build.MANUFACTURER} ${Build.MODEL} (Your device)",  CalcUtil.getWidth(this), CalcUtil.getHeight(this), CalcUtil.getScreenSize(this)))
+        val point = Point()
+        windowManager.defaultDisplay.getRealSize(point)
+        val widthPixels = point.x
+        val heightPixels = point.y
+        val densityDPI = resources.displayMetrics.densityDpi
+
+        deviceList.add(Device("${Build.MANUFACTURER} ${Build.MODEL} (Your device)",  widthPixels, heightPixels, CalcUtil.calculateScreenSize(widthPixels, heightPixels, densityDPI)))
         deviceList.addAll(DeviceUtil.getDeviceList())
 
         val adapter = DeviceRVAdapter(deviceList)
