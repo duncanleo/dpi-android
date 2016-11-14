@@ -14,22 +14,12 @@ class Device : Parcelable {
     var screenHeight: Int = 0
         private set
     var screenSize: Double = 0.toDouble()
-        private set
-    var isTitleHighlighted = false
 
     constructor(title: String, screenWidth: Int, screenHeight: Int, screenSize: Double) {
         this.title = title
         this.screenWidth = screenWidth
         this.screenHeight = screenHeight
         this.screenSize = screenSize
-    }
-
-    constructor(title: String, screenWidth: Int, screenHeight: Int, screenSize: Double, titleHighlighted: Boolean) {
-        this.title = title
-        this.screenWidth = screenWidth
-        this.screenHeight = screenHeight
-        this.screenSize = screenSize
-        this.isTitleHighlighted = titleHighlighted
     }
 
     override fun describeContents(): Int {

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="wrap_content"
     android:padding="16dp">
     <TextView
-        android:id="@+id/mainText"
+        android:id="@+id/labelDeviceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/standardText"
         android:textSize="16sp"
-        android:text="MainText"
+        tools:text="LG Nexus 5X"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
-        android:singleLine="true"/>
+        android:maxLines="1"/>
     <TextView
-        android:id="@+id/subText"
-        android:layout_below="@id/mainText"
+        android:id="@+id/labelDeviceSpecs"
+        android:layout_below="@id/labelDeviceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/lightBlack"
         android:textSize="14sp"
-        android:text="SubText"/>
+        tools:text="1080x1920 @ 4.5&quot;"/>
 </RelativeLayout>
