@@ -3,7 +3,6 @@ package com.duncan.dpi.activity
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
@@ -27,7 +26,6 @@ class DeviceListActivity : AppCompatActivity() {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1) // getRealSize is actually available in API 14+. This warning sidesteps the bug where it's flagged otherwise
     override fun onCreate(savedInstanceState: Bundle?) {
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_devicelist)
 

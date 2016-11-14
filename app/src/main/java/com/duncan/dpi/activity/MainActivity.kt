@@ -4,6 +4,7 @@ package com.duncan.dpi.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -76,6 +77,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         imageScreen.layoutParams = params
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString("width", inputWidth.editText?.text.toString())
+        outState?.putString("height", inputHeight.editText?.text.toString())
+        outState?.putString("screenSize", inputScreenSize.editText?.text.toString())
+        outState?.putString("result", labelDensity.text.toString())
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        inputWidth.editText?.setText(savedInstanceState?.getString("width"))
+        inputHeight.editText?.setText(savedInstanceState?.getString("height"))
+        inputScreenSize.editText?.setText(savedInstanceState?.getString("screenSize"))
+        labelDensity.text = savedInstanceState?.getString("result")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
