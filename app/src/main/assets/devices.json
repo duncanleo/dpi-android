@@ -1,18 +1,18 @@
 [
   {
-    "name": "Apple iPhone 5",
+    "name": "Apple iPhone 5S",
     "width": 640,
     "height": 1136,
     "screenSize": 4.0
   },
   {
-    "name": "Apple iPhone 6",
+    "name": "Apple iPhone 7",
     "width": 750,
     "height": 1334,
     "screenSize": 4.7
   },
   {
-    "name": "Apple iPhone 6 Plus",
+    "name": "Apple iPhone 7 Plus",
     "width": 1080,
     "height": 1920,
     "screenSize": 5.5
@@ -30,37 +30,43 @@
     "screenSize": 4.3
   },
   {
-    "name": "Samsung Galaxy S6",
+    "name": "Samsung Galaxy S7",
     "width": 1440,
     "height": 2560,
     "screenSize": 5.1
   },
   {
-    "name": "Macbook Air 11\"",
+    "name": "Samsung Galaxy S7 Edge",
+    "width": 1440,
+    "height": 2560,
+    "screenSize": 5.5
+  },
+  {
+    "name": "Apple MacBook Air 11\"",
     "width": 1366,
     "height": 768,
     "screenSize": 11.6
   },
   {
-    "name": "Macbook 12\"",
+    "name": "Apple MacBook 12\"",
     "width": 2304,
     "height": 1440,
     "screenSize": 12.0
   },
   {
-    "name": "Macbook Pro (Retina) 13\"",
+    "name": "Apple MacBook Pro (Retina) 13\"",
     "width": 2560,
     "height": 1600,
     "screenSize": 13.3
   },
   {
-    "name": "Macbook Pro (Retina) 15\"",
+    "name": "Apple MacBook Pro (Retina) 15\"",
     "width": 2880,
     "height": 1800,
     "screenSize": 15.4
   },
   {
-    "name": "Chromebook Pixel",
+    "name": "Google Chromebook Pixel",
     "width": 2560,
     "height": 1700,
     "screenSize": 12.85
@@ -70,5 +76,11 @@
     "width": 2880,
     "height": 1620,
     "screenSize": 15.6
+  },
+  {
+    "name": "Microsoft Surface Pro 4",
+    "width": 2736,
+    "height": 1824,
+    "screenSize": 12.3
   }
 ]
