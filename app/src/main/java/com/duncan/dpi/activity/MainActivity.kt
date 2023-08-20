@@ -4,18 +4,16 @@ package com.duncan.dpi.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.duncan.dpi.R
+import com.duncan.dpi.databinding.ActivityMainBinding
 import com.duncan.dpi.model.Device
 import com.duncan.dpi.util.CalcUtil
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding.widget.RxTextView
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent
-import kotlinx.android.synthetic.main.activity_main.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.functions.Action1
 import rx.functions.Func1
@@ -23,24 +21,27 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     internal val DEVICE_LIST_REQUEST_CODE = 9999
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val filter = Func1<TextViewTextChangeEvent, Boolean> { event -> event.text().isNotEmpty() }
         val action = Action1<TextViewTextChangeEvent> { event -> attemptCalculation() }
-        RxTextView.textChangeEvents(inputWidth.editText!!)
+        RxTextView.textChangeEvents(binding.inputWidth.editText!!)
                 .debounce(700, TimeUnit.MILLISECONDS)
                 .filter(filter)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action)
-        RxTextView.textChangeEvents(inputHeight.editText!!)
+        RxTextView.textChangeEvents(binding.inputHeight.editText!!)
                 .debounce(700, TimeUnit.MILLISECONDS)
                 .filter(filter)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action)
-        RxTextView.textChangeEvents(inputScreenSize.editText!!)
+        RxTextView.textChangeEvents(binding.inputScreenSize.editText!!)
                 .debounce(700, TimeUnit.MILLISECONDS)
                 .filter(filter)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -51,10 +52,10 @@ class MainActivity : AppCompatActivity() {
      * Attempt to calculate DPI
      */
     private fun attemptCalculation() {
-        val width = try { inputWidth.editText?.text.toString().toInt() } catch (e: NumberFormatException) { 0 }
-        val height = try { inputHeight.editText?.text.toString().toInt() } catch (e: NumberFormatException) { 0 }
-        val screenSize = try { inputScreenSize.editText?.text.toString().toDouble() } catch (e: NumberFormatException) { 0.0 }
-        labelDensity.text = "${CalcUtil.calculateDPI(width, height, screenSize)} dpi"
+        val width = try { binding.inputWidth.editText?.text.toString().toInt() } catch (e: NumberFormatException) { 0 }
+        val height = try { binding.inputHeight.editText?.text.toString().toInt() } catch (e: NumberFormatException) { 0 }
+        val screenSize = try { binding.inputScreenSize.editText?.text.toString().toDouble() } catch (e: NumberFormatException) { 0.0 }
+        binding.labelDensity.text = "${CalcUtil.calculateDPI(width, height, screenSize)} dpi"
 
         val screenWidth = resources.displayMetrics.widthPixels
         val screenHeight = resources.displayMetrics.heightPixels
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         val maxWidth = screenWidth * 0.5
         val maxHeight = screenHeight * 0.6
 
-        val params = imageScreen.layoutParams
+        val params = binding.imageScreen.layoutParams
 
         // Attempt maxWidth
         params.width = maxWidth.toInt()
@@ -76,23 +77,23 @@ class MainActivity : AppCompatActivity() {
             params.height = intendedHeight.toInt()
         }
 
-        imageScreen.layoutParams = params
+        binding.imageScreen.layoutParams = params
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putString("width", inputWidth.editText?.text.toString())
-        outState?.putString("height", inputHeight.editText?.text.toString())
-        outState?.putString("screenSize", inputScreenSize.editText?.text.toString())
-        outState?.putString("result", labelDensity.text.toString())
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("width", binding.inputWidth.editText?.text.toString())
+        outState.putString("height", binding.inputHeight.editText?.text.toString())
+        outState.putString("screenSize", binding.inputScreenSize.editText?.text.toString())
+        outState.putString("result", binding.labelDensity.text.toString())
         super.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        inputWidth.editText?.setText(savedInstanceState?.getString("width"))
-        inputHeight.editText?.setText(savedInstanceState?.getString("height"))
-        inputScreenSize.editText?.setText(savedInstanceState?.getString("screenSize"))
-        labelDensity.text = savedInstanceState?.getString("result")
+        binding.inputWidth.editText?.setText(savedInstanceState.getString("width"))
+        binding.inputHeight.editText?.setText(savedInstanceState.getString("height"))
+        binding.inputScreenSize.editText?.setText(savedInstanceState.getString("screenSize"))
+        binding.labelDensity.text = savedInstanceState.getString("result")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -116,11 +117,11 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == DEVICE_LIST_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val device = data?.getParcelableExtra<Device>("device")
-            inputWidth.editText?.setText("${device?.width}")
-            inputHeight.editText?.setText("${device?.height}")
-            inputScreenSize.editText?.setText(String.format("%.2f", device?.screenSize))
+            binding.inputWidth.editText?.setText("${device?.width}")
+            binding.inputHeight.editText?.setText("${device?.height}")
+            binding.inputScreenSize.editText?.setText(String.format("%.2f", device?.screenSize))
             attemptCalculation()
-            Snackbar.make(imageScreen, String.format("%s %s", getString(R.string.message_populate), device?.name), Snackbar.LENGTH_LONG)
+            Snackbar.make(binding.imageScreen, String.format("%s %s", getString(R.string.message_populate), device?.name), Snackbar.LENGTH_LONG)
                     .show()
         }
     }

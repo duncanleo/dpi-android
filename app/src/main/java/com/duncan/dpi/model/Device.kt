@@ -20,14 +20,14 @@ data class Device(
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readInt(), source.readInt(), source.readDouble())
+    constructor(source: Parcel) : this(source.readString()!!, source.readInt(), source.readInt(), source.readDouble())
 
     override fun describeContents() = 0
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(name)
-        dest?.writeInt(width)
-        dest?.writeInt(height)
-        dest?.writeDouble(screenSize)
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(name)
+        dest.writeInt(width)
+        dest.writeInt(height)
+        dest.writeDouble(screenSize)
     }
 }

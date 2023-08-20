@@ -11,6 +11,11 @@ android {
         versionCode 9
         versionName "2.2"
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled true

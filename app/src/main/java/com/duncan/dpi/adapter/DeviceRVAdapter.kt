@@ -1,15 +1,12 @@
 package com.duncan.dpi.adapter
 
 import android.graphics.Typeface
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.duncan.dpi.R
+import androidx.recyclerview.widget.RecyclerView
+import com.duncan.dpi.databinding.ListEntryBinding
 import com.duncan.dpi.`interface`.ItemClickListener
 import com.duncan.dpi.model.Device
-import kotlinx.android.synthetic.main.list_entry.view.*
 
 /**
  * Created by duncanleo on 13/11/16.
@@ -26,32 +23,27 @@ class DeviceRVAdapter(data: List<Device>) : RecyclerView.Adapter<DeviceRVAdapter
         return data.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val device = data[position]
-        holder?.deviceName?.text = device.name
-        holder?.deviceSpecs?.text = "${device.width}x${device.height} @ ${String.format("%.1f", device.screenSize)}\""
+        holder.binding.labelDeviceName.text = device.name
+        holder.binding.labelDeviceSpecs.text = "${device.width}x${device.height} @ ${String.format("%.1f", device.screenSize)}\""
 
         when(position) {
-            0 -> holder?.deviceName?.setTypeface(null, Typeface.BOLD)
-            else -> holder?.deviceName?.setTypeface(null, Typeface.NORMAL)
+            0 -> holder.binding.labelDeviceName.setTypeface(null, Typeface.BOLD)
+            else -> holder.binding.labelDeviceName.setTypeface(null, Typeface.NORMAL)
         }
 
-        holder?.itemView?.setOnClickListener { view ->
+        holder.itemView.setOnClickListener { view ->
             itemClickListener?.onItemClick(view, device)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_entry, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ListEntryBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val deviceName: TextView
-        val deviceSpecs: TextView
-
-        init {
-            this.deviceName = itemView.labelDeviceName
-            this.deviceSpecs = itemView.labelDeviceSpecs
-        }
+    class ViewHolder(val binding: ListEntryBinding) : RecyclerView.ViewHolder(binding.root) {
     }
 }
