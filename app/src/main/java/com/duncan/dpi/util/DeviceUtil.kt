@@ -23,6 +23,6 @@ class DeviceUtil(context: Context) {
         val moshi = Moshi.Builder().build()
         val adapter = moshi.adapter(Array<Device>::class.java)
         val result = adapter.fromJson(String(buffer))
-        return result
+        return result!!
     }
 }

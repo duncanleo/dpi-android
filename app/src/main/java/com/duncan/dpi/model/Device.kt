@@ -3,10 +3,12 @@ package com.duncan.dpi.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Created by duncan on 11/3/15.
  */
+@JsonClass(generateAdapter = true)
 data class Device(
         @Json(name = "name") var name: String,
         @Json(name = "width") var width: Int,
