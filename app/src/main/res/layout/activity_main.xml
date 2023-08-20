@@ -39,7 +39,7 @@
 
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_height="wrap_content"
         android:id="@+id/inputWidth"
         app:layout_constraintBottom_toTopOf="@+id/imageScreen"
@@ -59,9 +59,9 @@
             tools:text="1080"
             tools:layout_editor_absoluteY="0dp"
             tools:layout_editor_absoluteX="8dp" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputHeight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -81,9 +81,9 @@
             android:hint="@string/label_height"
             android:inputType="number"
             tools:text="1920"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputScreenSize"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/imageScreen"
@@ -101,7 +101,7 @@
             android:hint="@string/label_screensize"
             android:inputType="numberDecimal"
             tools:text="4.0&quot;"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </android.support.constraint.ConstraintLayout>

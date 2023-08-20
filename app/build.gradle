@@ -21,6 +21,15 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
     namespace 'com.duncan.dpi'
 }
 
@@ -33,8 +42,8 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:design:25.0.0'
-    implementation 'com.android.support:appcompat-v7:25.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.artemzin.rxjava:proguard-rules:1.2.1.0'
     implementation 'io.reactivex:rxjava:1.2.1'
@@ -43,6 +52,6 @@ dependencies {
     implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
     implementation 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.squareup.moshi:moshi:1.3.1'
 }

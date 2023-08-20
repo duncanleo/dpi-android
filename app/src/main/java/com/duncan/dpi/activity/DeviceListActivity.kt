@@ -6,9 +6,9 @@ import android.content.Intent
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.duncan.dpi.R
@@ -31,9 +31,15 @@ class DeviceListActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val layoutManager = LinearLayoutManager(this@DeviceListActivity)
+        val layoutManager =
+            LinearLayoutManager(this@DeviceListActivity)
         recyclerView.layoutManager = layoutManager
-        recyclerView.addItemDecoration(DividerItemDecoration(this@DeviceListActivity, layoutManager.orientation))
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this@DeviceListActivity,
+                layoutManager.orientation
+            )
+        )
 
         val point = Point()
         windowManager.defaultDisplay.getRealSize(point)
