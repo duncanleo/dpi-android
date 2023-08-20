@@ -10,18 +10,22 @@ import androidx.appcompat.app.AppCompatActivity
 import com.duncan.dpi.R
 import com.duncan.dpi.databinding.ActivityMainBinding
 import com.duncan.dpi.model.Device
+import com.duncan.dpi.util.AutoDisposable
 import com.duncan.dpi.util.CalcUtil
+import com.duncan.dpi.util.addTo
 import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding.widget.RxTextView
-import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent
-import rx.android.schedulers.AndroidSchedulers
-import rx.functions.Action1
-import rx.functions.Func1
+import com.jakewharton.rxbinding4.widget.TextViewTextChangeEvent
+import com.jakewharton.rxbinding4.widget.textChangeEvents
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.functions.Consumer
+import io.reactivex.rxjava3.functions.Predicate
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     internal val DEVICE_LIST_REQUEST_CODE = 9999
     private lateinit var binding: ActivityMainBinding
+    private val autoDisposable = AutoDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,23 +33,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val filter = Func1<TextViewTextChangeEvent, Boolean> { event -> event.text().isNotEmpty() }
-        val action = Action1<TextViewTextChangeEvent> { event -> attemptCalculation() }
-        RxTextView.textChangeEvents(binding.inputWidth.editText!!)
-                .debounce(700, TimeUnit.MILLISECONDS)
-                .filter(filter)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(action)
-        RxTextView.textChangeEvents(binding.inputHeight.editText!!)
-                .debounce(700, TimeUnit.MILLISECONDS)
-                .filter(filter)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(action)
-        RxTextView.textChangeEvents(binding.inputScreenSize.editText!!)
-                .debounce(700, TimeUnit.MILLISECONDS)
-                .filter(filter)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(action)
+        autoDisposable.bindTo(this.lifecycle)
+
+        val filter = Predicate<TextViewTextChangeEvent> { event -> event.text.isNotEmpty() }
+        val action = Consumer<TextViewTextChangeEvent> { event -> attemptCalculation() }
+
+        binding.inputWidth.editText!!.textChangeEvents()
+            .debounce(200, TimeUnit.MILLISECONDS)
+            .filter(filter)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.newThread())
+            .subscribe(action)
+            .addTo(autoDisposable)
+
+        binding.inputHeight.editText!!.textChangeEvents()
+            .debounce(200, TimeUnit.MILLISECONDS)
+            .filter(filter)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.newThread())
+            .subscribe(action)
+            .addTo(autoDisposable)
+
+        binding.inputScreenSize.editText!!.textChangeEvents()
+            .debounce(200, TimeUnit.MILLISECONDS)
+            .filter(filter)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.newThread())
+            .subscribe(action)
+            .addTo(autoDisposable)
     }
 
     /**
