@@ -55,7 +55,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.artemzin.rxjava:proguard-rules:1.2.1.0'
-    implementation 'io.reactivex:rxjava:1.2.1'
     implementation 'io.reactivex:rxkotlin:0.60.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
