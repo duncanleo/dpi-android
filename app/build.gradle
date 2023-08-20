@@ -1,5 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.devtools.ksp'
+}
 
 android {
     compileSdk 33
@@ -10,6 +13,7 @@ android {
         targetSdkVersion 33
         versionCode 9
         versionName "2.2"
+        multiDexEnabled true
     }
 
     buildFeatures {
@@ -60,4 +64,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.squareup.moshi:moshi:1.15.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.15.0'
+    ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.15.0'
 }
