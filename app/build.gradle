@@ -51,7 +51,7 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.artemzin.rxjava:proguard-rules:1.2.1.0'
