@@ -1,86 +1,140 @@
 [
   {
-    "name": "Apple iPhone 5S",
-    "width": 640,
-    "height": 1136,
-    "screenSize": 4.0
-  },
-  {
-    "name": "Apple iPhone 7",
+    "name": "Apple iPhone SE (3rd generation)",
     "width": 750,
     "height": 1334,
     "screenSize": 4.7
   },
   {
-    "name": "Apple iPhone 7 Plus",
+    "name": "Apple iPhone 14",
+    "width": 1170,
+    "height": 2532,
+    "screenSize": 6.1
+  },
+  {
+    "name": "Apple iPhone 14 Plus",
+    "width": 1284,
+    "height": 2778,
+    "screenSize": 6.7
+  },
+  {
+    "name": "Apple iPhone 14 Pro Max",
+    "width": 1290,
+    "height": 2796,
+    "screenSize": 6.7
+  },
+  {
+    "name": "HTC U23",
     "width": 1080,
-    "height": 1920,
-    "screenSize": 5.5
+    "height": 2400,
+    "screenSize": 6.7
   },
   {
-    "name": "HTC Evo 3D",
-    "width": 540,
-    "height": 960,
-    "screenSize": 4.3
+    "name": "Samsung Galaxy A34",
+    "width": 1080,
+    "height": 2340,
+    "screenSize": 6.6
   },
   {
-    "name": "Sony Xperia S",
-    "width": 720,
-    "height": 1080,
-    "screenSize": 4.3
+    "name": "Samsung Galaxy S23",
+    "width": 1080,
+    "height": 2340,
+    "screenSize": 6.1
   },
   {
-    "name": "Samsung Galaxy S7",
+    "name": "Samsung Galaxy S23+",
+    "width": 1080,
+    "height": 2340,
+    "screenSize": 6.6
+  },
+  {
+    "name": "Samsung Galaxy S23 Ultra",
     "width": 1440,
-    "height": 2560,
-    "screenSize": 5.1
+    "height": 3088,
+    "screenSize": 6.8
   },
   {
-    "name": "Samsung Galaxy S7 Edge",
-    "width": 1440,
-    "height": 2560,
-    "screenSize": 5.5
+    "name": "Samsung Galaxy Z Fold 5",
+    "width": 1812,
+    "height": 2176,
+    "screenSize": 7.6
   },
   {
-    "name": "Apple MacBook Air 11\"",
-    "width": 1366,
-    "height": 768,
-    "screenSize": 11.6
+    "name": "Google Pixel 7a",
+    "width": 1080,
+    "height": 2400,
+    "screenSize": 6.1
   },
   {
-    "name": "Apple MacBook 12\"",
-    "width": 2304,
-    "height": 1440,
-    "screenSize": 12.0
+    "name": "Google Pixel 7",
+    "width": 1080,
+    "height": 2400,
+    "screenSize": 6.3
   },
   {
-    "name": "Apple MacBook Pro (Retina) 13\"",
+    "name": "Apple MacBook Air (13-inch, M2, 2022)",
+    "width": 2560,
+    "height": 1664,
+    "screenSize": 13.6
+  },
+  {
+    "name": "Apple MacBook Air (15-inch, M2, 2023)",
+    "width": 2880,
+    "height": 1864,
+    "screenSize": 15.3
+  },
+  {
+    "name": "Apple MacBook Pro (13-inch, M2, 2022)",
     "width": 2560,
     "height": 1600,
     "screenSize": 13.3
   },
   {
-    "name": "Apple MacBook Pro (Retina) 15\"",
+    "name": "Apple MacBook Pro (14-inch, 2023)",
+    "width": 3024,
+    "height": 1964,
+    "screenSize": 14.2
+  },
+  {
+    "name": "Apple MacBook Pro (16-inch, 2023)",
+    "width": 3456,
+    "height": 2234,
+    "screenSize": 16.2
+  },
+  {
+    "name": "HP Pavilion Plus 14",
     "width": 2880,
     "height": 1800,
-    "screenSize": 15.4
+    "screenSize": 14
   },
   {
-    "name": "Google Chromebook Pixel",
+    "name": "Asus ROG Zephyrus G14",
     "width": 2560,
-    "height": 1700,
-    "screenSize": 12.85
+    "height": 1600,
+    "screenSize": 14
   },
   {
-    "name": "ASUS Zenbook UX51VZ",
-    "width": 2880,
-    "height": 1620,
-    "screenSize": 15.6
+    "name": "Framework Laptop 13",
+    "width": 2256,
+    "height": 1540,
+    "screenSize": 13.5
   },
   {
-    "name": "Microsoft Surface Pro 4",
-    "width": 2736,
-    "height": 1824,
-    "screenSize": 12.3
+    "name": "Dell XPS 13",
+    "width": 1920,
+    "height": 1200,
+    "screenSize": 13.4
+  },
+  {
+    "name": "Microsoft Surface Laptop 5",
+    "width": 2256,
+    "height": 1504,
+    "screenSize": 13.5
+  },
+  {
+    "name": "HP Elite Dragonfly Pro",
+    "width": 1920,
+    "height": 1200,
+    "screenSize": 14
   }
 ]
