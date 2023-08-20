@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.duncan.dpi"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 33
         versionCode 9
         versionName "2.2"
     }
